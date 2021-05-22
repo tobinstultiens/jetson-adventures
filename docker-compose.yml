@@ -14,8 +14,8 @@ services:
       - PLEX_CLAIM= #optional
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
-      - /mnt/nas:/config
-      - /mnt/NAS/$LOCATION:/storage
+      - $HOME/.config/PLEX:/config
+      - /mnt/PLEX:/storage
     restart: always
     labels:
       - com.centurylinklabs.watchtower.enable=true
