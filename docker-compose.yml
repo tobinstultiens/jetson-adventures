@@ -1,0 +1,32 @@
+version: "3.3"
+
+services:
+  plex:
+    depends_on:
+      - watchtower
+    image: linuxserver/plex:bionic
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - /mnt/nas:/config
+      - /mnt/NAS/$LOCATION:/storage
+    restart: always
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    command: --cleanup --label-enable --interval 3600
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    restart: always
+    network_mode: none
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
