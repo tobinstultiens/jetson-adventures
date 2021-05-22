@@ -13,3 +13,5 @@ sudo apt install curl
 # Install nvidia-docker2
 sudo apt-get update
 sudo apt-get install -y nvidia-docker2
+# Restart docker
+sudo systemctl restart docker
